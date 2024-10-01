@@ -28,7 +28,7 @@ CREATE TABLE completion_status (
 -- Note that Amounts are in a minor denomintaions (cents)
 CREATE TABLE zapper_transactions (
 
-    TranId bigint not null
+    TranId bigint not null,
     TranUuid varchar(36), -- UUID Variant 7 Reference for external lookups
     TranDate date,
     TranTime time,
@@ -42,7 +42,7 @@ CREATE TABLE zapper_transactions (
     TranCompletionStatus int not null,
     TranDescription varchar(100),
 
-    PRIMARY_KEY (TranId)
+    PRIMARY_KEY (TranId),
     FOREIGN KEY (MerchanId) REFERENCES mechants(MerchantId),
     FOREIGN KEY (TranAuthStatus) REFERENCES auth_status(StatusId),
     FOREIGN KEY (TranCompletionStatus) REFERENCES completion_status(StatusId)
