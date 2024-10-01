@@ -3,6 +3,9 @@ using System.Runtime.CompilerServices;
 
 namespace ZapperTechEval;
 
+/// <summary>
+/// Contains the settings for a user as a string of flags.
+/// </summary>
 public class UserSettings
 {
     public const uint SMS_NOTIFICATIONS = 0;
@@ -16,6 +19,10 @@ public class UserSettings
 
     public string settings = "00000000";
 
+    /// <summary>
+    /// Constructor with values for the settings.
+    /// </summary>
+    /// <param name="settings"></param>
     public UserSettings(string settings)
     {
         if (settings.Length == 8)
@@ -28,6 +35,11 @@ public class UserSettings
         }
     }
 
+    /// <summary>
+    /// Checks if a specific setting is enabled.
+    /// </summary>
+    /// <param name="setting">The specfic setting to check for</param>
+    /// <returns>True when enabled</returns>
     public bool IsEnabled(uint setting)
     {
         if (IsValidSetting(setting))
@@ -41,6 +53,11 @@ public class UserSettings
         }
     }
 
+    /// <summary>
+    /// Reads the settings from a file.
+    /// </summary>
+    /// <param name="fileName">Filename for the settings.</param>
+    /// <returns>0 when successful, -1 when the read failed.</returns>
     public int Read(String fileName)
     {
         using FileStream fileStream = new(fileName, FileMode.Open, FileAccess.Read);
@@ -63,6 +80,11 @@ public class UserSettings
         return 0;
     }
 
+    /// <summary>
+    /// Saves the settings to a file as a byte.
+    /// </summary>
+    /// <param name="fileName">Filename for the settings.</param>
+    /// <returns>0 when successful, -1 when failed.</returns>
     public int Save(String fileName)
     {
         using FileStream fileStream = new(fileName, FileMode.OpenOrCreate, FileAccess.Write);
