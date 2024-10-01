@@ -5,6 +5,8 @@ CREATE TABLE Mechants (
     MerchantId bigint not null,
     MerchantName varchar(100) not null,
     MerchantAddress varchar(255),
+    MerchantEmail varchar(100),
+    MerchantPhoneNumber varchar(20),
 
     PRIMARY_KEY (MerchantId)
 )
@@ -14,6 +16,8 @@ CREATE TABLE ZapperUsers (
     UserId bigint not null,
     UserName varchar(100) not null,
     UserAddress varchar(255),
+    UserEmail varchar(100),
+    UserPhoneNumber varchar(20),
 
     PRIMARY_KEY (UserId)
 )
