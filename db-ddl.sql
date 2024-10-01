@@ -13,7 +13,7 @@ CREATE TABLE users (
     
     UserId bigint not null,
     UserName varchar(100) not null,
-    UserIdAddress varchar(255),
+    UserAddress varchar(255),
 
     PRIMARY_KEY (UserId)
 )
