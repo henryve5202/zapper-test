@@ -1,6 +1,6 @@
 CREATE DATABASE zapper;
 
-CREATE TABLE mechants (
+CREATE TABLE Mechants (
     
     MerchantId bigint not null,
     MerchantName varchar(100) not null,
@@ -9,7 +9,7 @@ CREATE TABLE mechants (
     PRIMARY_KEY (MerchantId)
 )
 
-CREATE TABLE users (
+CREATE TABLE ZapperUsers (
     
     UserId bigint not null,
     UserName varchar(100) not null,
@@ -18,7 +18,7 @@ CREATE TABLE users (
     PRIMARY_KEY (UserId)
 )
 
-CREATE TABLE auth_status (
+CREATE TABLE AuthStatus (
     
     StatusId int not null,
     StatusDescription varchar(100) not null,
@@ -26,7 +26,7 @@ CREATE TABLE auth_status (
     PRIMARY_KEY (StatusId)
 )
 
-CREATE TABLE completion_status (
+CREATE TABLE CompletionStatus (
     
     StatusId int not null,
     StatusDescription varchar(100) not null,
@@ -35,7 +35,7 @@ CREATE TABLE completion_status (
 )
 
 -- Note that Amounts are in a minor denomintaions (cents)
-CREATE TABLE zapper_transactions (
+CREATE TABLE ZapperTransactions (
 
     TranId bigint not null,
     TranUuid varchar(36), -- UUID Variant 7 Reference for external lookups
@@ -53,8 +53,8 @@ CREATE TABLE zapper_transactions (
     TranDescription varchar(100),
 
     PRIMARY_KEY (TranId),
-    FOREIGN KEY (MerchantId) REFERENCES mechants(MerchantId),
-    FOREIGN KEY (UserId) REFERENCES users(UserId),
-    FOREIGN KEY (TranAuthStatus) REFERENCES auth_status(StatusId),
-    FOREIGN KEY (TranCompletionStatus) REFERENCES completion_status(StatusId)
+    FOREIGN KEY (MerchantId) REFERENCES Mechants(MerchantId),
+    FOREIGN KEY (UserId) REFERENCES ZapperUsers(UserId),
+    FOREIGN KEY (TranAuthStatus) REFERENCES AuthStatus(StatusId),
+    FOREIGN KEY (TranCompletionStatus) REFERENCES CompletionStatus(StatusId)
 )
