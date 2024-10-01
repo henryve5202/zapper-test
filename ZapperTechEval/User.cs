@@ -5,14 +5,14 @@ namespace ZapperTechEval;
 
 public class UserSettings
 {
-    public const int SMS_NOTIFICATIONS = 0;
-    public const int PUSH_NOTIICATIONS = 1;
-    public const int BIOMETRICS = 2;
-    public const int CAMERA = 3;
-    public const int LOCATION = 4;
-    public const int NFC = 5;
-    public const int VOUCHERS = 6;
-    public const int LOYALTY = 7;
+    public const uint SMS_NOTIFICATIONS = 0;
+    public const uint PUSH_NOTIICATIONS = 1;
+    public const uint BIOMETRICS = 2;
+    public const uint CAMERA = 3;
+    public const uint LOCATION = 4;
+    public const uint NFC = 5;
+    public const uint VOUCHERS = 6;
+    public const uint LOYALTY = 7;
 
     public string settings = "00000000";
 
@@ -28,9 +28,17 @@ public class UserSettings
         }
     }
 
-    public bool IsEnabled(int setting)
+    public bool IsEnabled(uint setting)
     {
-        return this.settings[setting] == '1';
+        if (IsValidSetting(setting))
+        {
+            return settings[Convert.ToInt32(setting)] == '1';
+        }
+        else
+        {
+            Console.WriteLine("Invalid Setting Provided");
+            return false;
+        }
     }
 
     public int Read(String fileName)
@@ -50,6 +58,7 @@ public class UserSettings
             }
         }
 
+        // Convert settings back from byte read    
         settings = Convert.ToString(dataArray[0], 2).PadLeft(8, '0');
         return 0;
     }
@@ -57,10 +66,17 @@ public class UserSettings
     public int Save(String fileName)
     {
         using FileStream fileStream = new(fileName, FileMode.OpenOrCreate, FileAccess.Write);
+
+        // Convert settings to byte to save space
         byte b = Convert.ToByte(settings, 2);
         fileStream.WriteByte(b);
         fileStream.Close();
 
         return 0;
+    }
+
+    private static bool IsValidSetting(uint setting)
+    {
+        return setting < 8;
     }
 }
