@@ -9,6 +9,15 @@ CREATE TABLE mechants (
     PRIMARY_KEY (MerchantId)
 )
 
+CREATE TABLE users (
+    
+    UserId bigint not null,
+    UserName varchar(100) not null,
+    UserIdAddress varchar(255),
+
+    PRIMARY_KEY (UserId)
+)
+
 CREATE TABLE auth_status (
     
     StatusId int not null,
@@ -38,12 +47,14 @@ CREATE TABLE zapper_transactions (
     TranAmountServiceFee bigint not null, 
     MerchantId bigint not null,
     MerchantRequestReference varchar(36) not null,
+    UserId bigint not null,
     TranAuthStatus int not null,
     TranCompletionStatus int not null,
     TranDescription varchar(100),
 
     PRIMARY_KEY (TranId),
-    FOREIGN KEY (MerchanId) REFERENCES mechants(MerchantId),
+    FOREIGN KEY (MerchantId) REFERENCES mechants(MerchantId),
+    FOREIGN KEY (UserId) REFERENCES users(UserId),
     FOREIGN KEY (TranAuthStatus) REFERENCES auth_status(StatusId),
     FOREIGN KEY (TranCompletionStatus) REFERENCES completion_status(StatusId)
 )
